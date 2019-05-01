@@ -13,7 +13,6 @@ class SearchViewTableCell: UITableViewCell {
     private var favoritesManager = FavoritesManager()
     public var items: Items?
     
-    
     @IBOutlet weak var idLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!

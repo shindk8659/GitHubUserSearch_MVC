@@ -13,7 +13,7 @@
         <!--Search-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Search" id="BYZ-38-t0r" customClass="SearchViewController" customModule="githubExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Search" id="BYZ-38-t0r" customClass="SearchViewController" customModule="GitHubUserSearch_MVC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" rowHeight="150" id="0HU-Pe-D9h" customClass="SearchViewTableCell" customModule="githubExample" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" rowHeight="150" id="0HU-Pe-D9h" customClass="SearchViewTableCell" customModule="GitHubUserSearch_MVC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0HU-Pe-D9h" id="0FH-TP-Ipe">
@@ -102,7 +102,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="GitHub 검색" id="Wi8-LO-ZWx"/>
                     <connections>
-                        <outlet property="tableView" destination="j3E-PD-DEb" id="L7D-Wn-GVf"/>
+                        <outlet property="searchTableView" destination="j3E-PD-DEb" id="L7D-Wn-GVf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -112,7 +112,7 @@
         <!--User Web View Controller-->
         <scene sceneID="Rsu-lA-PuY">
             <objects>
-                <viewController storyboardIdentifier="userWeb" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mQD-M3-z51" customClass="UserWebViewController" customModule="githubExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="userWeb" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mQD-M3-z51" customClass="UserWebViewController" customModule="GitHubUserSearch_MVC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gDB-rW-cul">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -187,7 +187,7 @@
         <!--Favorite-->
         <scene sceneID="dco-dh-NaR">
             <objects>
-                <viewController title="Favorite" id="fRf-Bn-iVJ" customClass="FavoriteViewController" customModule="githubExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Favorite" id="fRf-Bn-iVJ" customClass="FavoriteViewController" customModule="GitHubUserSearch_MVC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8yY-2r-bTg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -196,7 +196,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteCell" rowHeight="150" id="IBS-7I-cum" customClass="FavoriteViewTableCell" customModule="githubExample" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteCell" rowHeight="150" id="IBS-7I-cum" customClass="FavoriteViewTableCell" customModule="GitHubUserSearch_MVC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IBS-7I-cum" id="17b-1n-Fb2">

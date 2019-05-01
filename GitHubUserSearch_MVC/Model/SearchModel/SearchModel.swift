@@ -7,9 +7,10 @@
 //
 
 struct SearchModel : Codable {
-    let total_count : Int?
-    let incomplete_results : Bool?
-    var items : [Items]?
+    
+    public let total_count : Int?
+    public let incomplete_results : Bool?
+    public var items : [Items]?
     
     enum CodingKeys: String, CodingKey {
         case total_count = "total_count"

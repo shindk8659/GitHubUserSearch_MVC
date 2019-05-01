@@ -10,7 +10,8 @@ import Alamofire
 
 class NetworkManager {
     
-    func search(searchWord:String,searchPage:Int, completion: @escaping (SearchModel?,Error?) -> Void) {
+    func search(searchWord:String, searchPage:Int,
+                completion: @escaping (SearchModel?,Error?) -> Void) {
         let url = "https://api.github.com/search/users?q=\(searchWord)&page=\(searchPage)"
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil)
             .responseJSON {

@@ -19,13 +19,13 @@ class SearchViewController: UIViewController {
     private var totalCount = 1000
     private var searchModel: SearchModel?
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.tableFooterView = UIView(frame: .zero)
+        self.searchTableView.delegate = self
+        self.searchTableView.dataSource = self
+        self.searchTableView.tableFooterView = UIView(frame: .zero)
         self.searchBar.delegate = self
         self.searchBar.placeholder = "GitHub ID를 검색 해주세요. :)"
         self.navigationItem.titleView = self.searchBar
@@ -33,7 +33,7 @@ class SearchViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
-        self.tableView.reloadData()
+        self.searchTableView.reloadData()
     }
     
 }
@@ -46,12 +46,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell") as! SearchViewTableCell
-        cell.idLabel.text = searchModel?.items?[indexPath.row].login
-        cell.scoreLabel.text = "Score: \( String(format: "%.6f",(searchModel?.items?[indexPath.row].score)!))점"
-        cell.items = searchModel?.items?[indexPath.row]
-        cell.avatarImageView.sd_setImage(with: URL(string: (searchModel?.items?[indexPath.row].avatar_url)!), placeholderImage:nil)
+        let items = searchModel?.items?[indexPath.row]
+        cell.items = items
+        cell.idLabel.text = items?.login
+        cell.scoreLabel.text = "Score: \( String(format: "%.6f",(items?.score)!))점"
+        cell.avatarImageView.sd_setImage(with: URL(string: (items?.avatar_url)!), placeholderImage:nil)
         
-        favoritesManager.isFavoriteSelected(items: searchModel?.items?[indexPath.row]) { (bool) in
+        favoritesManager.isFavoriteSelected(items:items) { (bool) in
             if bool == true {
                 cell.favoriteButton.setImage(UIImage.init(named: "reviewIcStar"), for: .normal)
             } else {
@@ -65,7 +66,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let userPageViewController = self.storyboard?.instantiateViewController(withIdentifier: "userWeb") as! UserWebViewController
-        userPageViewController.urlString = searchModel?.items?[indexPath.row].html_url ?? ""
+        let items = searchModel?.items?[indexPath.row]
+        userPageViewController.urlString = items?.html_url ?? ""
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.pushViewController(userPageViewController, animated: true)
         
@@ -75,7 +77,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource
         let count = searchModel?.items?.count ?? 0
         if indexPath.row == count - 1 {
             if count < totalCount {
-                networkManager.search(searchWord: searchWord, searchPage: currentPage) {
+                self.networkManager.search(searchWord: searchWord, searchPage: currentPage) {
                     [weak self] model,error in
                     if model?.items != nil {
                         self?.searchModel?.items? += (model?.items)!
@@ -92,7 +94,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     @objc func loadTable() {
-       self.tableView.reloadData()
+       self.searchTableView.reloadData()
         
     }
 }
@@ -100,25 +102,25 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource
 extension SearchViewController: UISearchBarDelegate
 {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = true;
+        self.searchBar.showsCancelButton = true;
         
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false;
+        self.searchBar.showsCancelButton = false;
         
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchModel = nil
         self.currentPage = 1
-        self.tableView.setContentOffset(CGPoint.zero, animated: false)
-        self.tableView.reloadData()
+        self.searchTableView.setContentOffset(CGPoint.zero, animated: false)
+        self.searchTableView.reloadData()
         
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.tableView.setContentOffset(CGPoint.zero, animated: false)
+        self.searchTableView.setContentOffset(CGPoint.zero, animated: false)
         self.currentPage = 1
         self.searchWord = searchBar.text ?? ""
         self.networkManager.search(searchWord: searchWord, searchPage: currentPage) { [weak self] model, error in
@@ -126,7 +128,7 @@ extension SearchViewController: UISearchBarDelegate
                 self?.searchModel = model
                 self?.currentPage += 1
                 self?.totalCount = (model?.total_count)! > 1000 ? 1000: (model?.total_count)!
-                self?.tableView.reloadData()
+                self?.searchTableView.reloadData()
                 
             }
             
